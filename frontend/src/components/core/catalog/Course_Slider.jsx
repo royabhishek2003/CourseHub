@@ -1,0 +1,69 @@
+import React, { useEffect, useState } from "react"
+// Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react"
+
+// Import Swiper styles
+import "swiper/css"
+import "swiper/css/free-mode"
+import "swiper/css/pagination"
+// import "../../.."
+// Import required modules
+import { FreeMode, Pagination, Navigation, Mousewheel } from "swiper"
+import "swiper/css/navigation"
+
+// import { getAllCourses } from "../../services/operations/courseDetailsAPI"
+import Course_Card from "./Course_Card"
+
+function Course_Slider({ Courses }) {
+  return (
+    <>
+      {Courses?.length ? (
+        <Swiper
+          // slidesPerView={1}
+          // spaceBetween={25}
+          // loop={true}
+          // modules={[FreeMode, Pagination]}
+
+          //   slidesPerView={1}
+          //   spaceBetween={25}
+          //   loop={false}
+          //   navigation={true}
+          //   modules={[FreeMode, Pagination, Navigation]}
+          // breakpoints={{
+          //   1024: {
+          //     slidesPerView: 3,
+          //   },
+          // }}
+          // className="max-h-[30rem]"
+
+  //         slidesPerView={3}
+  // spaceBetween={25}
+  // loop={false}
+  // navigation={true}
+  // modules={[FreeMode, Pagination, Navigation]}
+  // className="w-full"
+
+  slidesPerView={3}
+  spaceBetween={25}
+  loop={false}
+  navigation={true}
+  freeMode={true}
+  grabCursor={true}
+  mousewheel={{ forceToAxis: true }}
+  modules={[FreeMode, Pagination, Navigation, Mousewheel]}
+  className="w-full px-10"
+        >
+          {Courses?.map((course, i) => (
+            <SwiperSlide key={i}>
+              <Course_Card course={course} Height={"h-[250px]"} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      ) : (
+        <p className="text-xl text-richblack-5">No Course Found</p>
+      )}
+    </>
+  )
+}
+
+export default Course_Slider
