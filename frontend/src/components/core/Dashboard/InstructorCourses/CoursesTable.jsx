@@ -17,6 +17,9 @@ import {
 } from "../../../../services/operations/courseDetailsAPI"
 import { COURSE_STATUS } from "../../../../utils/constants"
 import ConfirmationModal from "../../../Common/ConfirmationModal"
+import { fetchCourseDetails } from "../../../../services/operations/courseDetailsAPI"
+import { useEffect } from "react"
+
 
 export default function CoursesTable({ courses, setCourses }) {
   const dispatch = useDispatch()
@@ -38,6 +41,29 @@ export default function CoursesTable({ courses, setCourses }) {
   }
 
   // console.log("All Course ", courses)
+
+  const [durations, setDurations] = useState({})
+
+  useEffect(() => {
+  const loadDurations = async () => {
+    const map = {}
+
+    const promises = courses.map(async (course) => {
+      const res = await fetchCourseDetails(course._id, false)
+
+      if (res?.success) {
+        map[course._id] = res.data.totalDuration
+      } else {
+        map[course._id] = "—"
+      }
+    })
+
+    await Promise.all(promises)
+    setDurations(map)
+  }
+
+  if (courses?.length) loadDurations()
+}, [courses])
 
   return (
     <>
@@ -110,7 +136,7 @@ export default function CoursesTable({ courses, setCourses }) {
                   </div>
                 </Td>
                 <Td className="text-sm font-medium text-richblack-100">
-                  2hr 30min
+                  {durations[course._id] || "Loading..."}
                 </Td>
                 <Td className="text-sm font-medium text-richblack-100">
                   ₹{course.price}

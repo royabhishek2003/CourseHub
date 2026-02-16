@@ -26,7 +26,7 @@ export default function CourseAccordionBar({ course, isActive, handleActive }) {
           }}
         >
           <div className="flex items-center gap-2">
-            <i
+            <i 
               className={
                 isActive.includes(course._id) ? "rotate-180" : "rotate-0"
               }

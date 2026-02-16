@@ -7,6 +7,7 @@ const initialState = {
   paymentLoading: false,
 }
 
+
 const courseSlice = createSlice({
   name: "course",
   initialState,

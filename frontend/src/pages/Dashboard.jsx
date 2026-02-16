@@ -20,7 +20,7 @@ function Dashboard() {
       <Sidebar />
       <div className="h-[calc(100vh-3.5rem)] flex-1 overflow-auto">
         <div className="mx-auto w-11/12 max-w-[1000px] py-10">
-          <Outlet />
+          <Outlet /> {/* render the current nested route here /dashboard/profile → Profile page appears inside Outlet*/}
         </div>
       </div>
     </div>

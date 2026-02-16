@@ -11,6 +11,15 @@ exports.createCategory = async (req, res) => {
         .status(400)
         .json({ success: false, message: "All fields are required" })
     }
+
+    if( await Category.findOne({ name: name })) {
+      return res.status(400).json({
+        success: false,
+        message: "Category with this name already exists",
+      })
+    }
+
+    
     const CategorysDetails = await Category.create({
       name: name,
       description: description,

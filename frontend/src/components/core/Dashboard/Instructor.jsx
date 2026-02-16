@@ -41,7 +41,7 @@ export default function Instructor() {
     <div>
       <div className="space-y-2">
         <h1 className="text-2xl font-bold text-richblack-5">
-          Hi {user?.firstName} 👋
+          Hi {user?.firstName} , Welcome Back !
         </h1>
         <p className="font-medium text-richblack-200">
           Let's start something new

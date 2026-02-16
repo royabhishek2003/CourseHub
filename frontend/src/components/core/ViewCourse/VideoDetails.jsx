@@ -177,14 +177,17 @@ const VideoDetails = () => {
           className="h-full w-full rounded-md object-cover"
         />
       ) : (
-        <Player
+
+        <Player 
           ref={playerRef}
-          aspectRatio="16:9"
+          // aspectRatio="16:9"
           playsInline
           onEnded={() => setVideoEnded(true)}
           src={videoData?.videoUrl}
         >
           <BigPlayButton position="center" />
+
+        
           {/* Render When Video Ends */}
           {videoEnded && (
             <div
