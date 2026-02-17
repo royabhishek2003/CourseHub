@@ -41,7 +41,7 @@ const mailSender = async (email, title, body) => {
 
     const sendSmtpEmail = {
       to: [{ email }],
-      sender: { email: "noreply@brevo.com", name: "CourseHub" },
+      sender: { email: "royabhishek8483@gmail.com", name: "CourseHub" },
       subject: title,
       htmlContent: body,
     };
