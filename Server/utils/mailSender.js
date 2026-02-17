@@ -3,14 +3,17 @@ const nodemailer = require("nodemailer");
 const mailSender = async (email, title, body) => {
   try {
     const transporter = nodemailer.createTransport({
-      host: "smtp.gmail.com",
-      port: 465,
-      secure: true, // REQUIRED for port 465
-      auth: {
-        user: process.env.MAIL_USER,
-        pass: process.env.MAIL_PASS,
-      },
-    });
+  host: "smtp.gmail.com",
+  port: 587,
+  secure: false, // IMPORTANT
+  auth: {
+    user: process.env.MAIL_USER,
+    pass: process.env.MAIL_PASS,
+  },
+  tls: {
+    rejectUnauthorized: false,
+  },
+});
 
     const info = await transporter.sendMail({
       from: `"Studynotion | CodeHelp" <${process.env.MAIL_USER}>`,
