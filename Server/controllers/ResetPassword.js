@@ -24,8 +24,8 @@ exports.resetPasswordToken = async (req, res) => {
     )
     console.log("DETAILS", updatedDetails)
 
-    const url = `http://localhost:5173/update-password/${token}`
-    // const url = `https://studynotion-edtech-project.vercel.app/update-password/${token}`
+    const frontendUrl = process.env.FRONTEND_URL || "http://localhost:5173"
+    const url = `${frontendUrl}/update-password/${token}`
 
     await mailSender(
       email,
