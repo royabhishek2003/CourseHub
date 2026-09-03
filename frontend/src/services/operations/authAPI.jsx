@@ -176,14 +176,16 @@ export function resetPassword(password, confirmPassword, token, navigate) {
   }
 }  
 
-export function logout(navigate) {
+export function logout(navigate, showToast = true) {
   return (dispatch) => {
     dispatch(setToken(null))
     dispatch(setUser(null))
     dispatch(resetCart())
     localStorage.removeItem("token")
     localStorage.removeItem("user")
-    toast.success("Logged Out")
+    if (showToast) {
+      toast.success("Logged Out")
+    }
     navigate("/")
   }
 }
