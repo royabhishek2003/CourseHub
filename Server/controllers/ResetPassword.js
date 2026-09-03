@@ -2,6 +2,7 @@ const User = require("../models/User")
 const mailSender = require("../utils/mailSender")
 const bcrypt = require("bcrypt")
 const crypto = require("crypto")
+const resetPasswordTemplate = require("../mail/templates/resetPasswordTemplate")
 exports.resetPasswordToken = async (req, res) => {
   try {
     const email = req.body.email
@@ -32,8 +33,8 @@ exports.resetPasswordToken = async (req, res) => {
 
     await mailSender(
       email,
-      "Password Reset",
-      `Your Link for email verification is ${url}. Please click this url to reset your password.`
+      "Reset Your Password - CourseHub",
+      resetPasswordTemplate(url, user.firstName || "Learner")
     )
 
     res.json({
@@ -41,6 +42,7 @@ exports.resetPasswordToken = async (req, res) => {
       message:
         "Email Sent Successfully, Please Check Your Email to Continue Further",
     })
+    
   } catch (error) {
     console.error("RESET PASSWORD TOKEN ERROR:", error)
     return res.status(500).json({

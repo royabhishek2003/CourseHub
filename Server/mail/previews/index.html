@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CourseHub - Interactive Email Templates Gallery</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      background: #000814;
+      color: #F1F2FF;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+    }
+    header {
+      background: #161D29;
+      padding: 16px 24px;
+      border-bottom: 1px solid #2C333F;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 20px;
+      font-weight: 800;
+    }
+    .brand-badge {
+      width: 34px;
+      height: 34px;
+      background: linear-gradient(135deg, #FFD60A, #FFA200);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000814;
+      font-weight: 900;
+      font-size: 18px;
+    }
+    .tabs {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      max-width: 100%;
+    }
+    .tab-btn {
+      background: #2C333F;
+      color: #AFB2BF;
+      border: 1px solid transparent;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .tab-btn:hover {
+      background: #3a4352;
+      color: #FFFFFF;
+    }
+    .tab-btn.active {
+      background: #FFD60A;
+      color: #000814;
+      font-weight: 700;
+      box-shadow: 0 2px 10px rgba(255, 214, 10, 0.4);
+    }
+    .viewport-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .size-btn {
+      background: transparent;
+      border: 1px solid #424854;
+      color: #DBDDEA;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .size-btn.active {
+      border-color: #06D6A0;
+      color: #06D6A0;
+    }
+    main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      background: #00040A;
+      padding: 16px;
+      overflow: hidden;
+    }
+    iframe {
+      border: none;
+      width: 100%;
+      max-width: 680px;
+      height: 100%;
+      border-radius: 12px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+      background: #000814;
+      transition: max-width 0.3s ease;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="brand-badge">C</div>
+      <div>Course<span style="color:#FFD60A;">Hub</span> Email Suite</div>
+    </div>
+    <div class="tabs" id="tabs">
+      <button class="tab-btn active" onclick="switchTab('01-otp-verification.html', this)">1. OTP Email Verification</button>
+      <button class="tab-btn " onclick="switchTab('02-reset-password.html', this)">2. Reset Password</button>
+      <button class="tab-btn " onclick="switchTab('03-password-updated.html', this)">3. Password Update Confirmation</button>
+      <button class="tab-btn " onclick="switchTab('04-course-enrollment.html', this)">4. Course Enrollment</button>
+      <button class="tab-btn " onclick="switchTab('05-payment-success.html', this)">5. Payment Success Receipt</button>
+      <button class="tab-btn " onclick="switchTab('06-contact-us.html', this)">6. Contact Us Acknowledgment</button>
+    </div>
+    <div class="viewport-controls">
+      <button class="size-btn active" onclick="setSize('680px', this)">Desktop</button>
+      <button class="size-btn" onclick="setSize('420px', this)">Mobile</button>
+    </div>
+  </header>
+  <main>
+    <iframe id="previewFrame" src="01-otp-verification.html"></iframe>
+  </main>
+  <script>
+    function switchTab(src, btn) {
+      document.getElementById('previewFrame').src = src;
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    }
+    function setSize(width, btn) {
+      document.getElementById('previewFrame').style.maxWidth = width;
+      document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    }
+  </script>
+</body>
+</html>
