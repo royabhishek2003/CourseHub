@@ -24,7 +24,10 @@ exports.resetPasswordToken = async (req, res) => {
     )
     console.log("DETAILS", updatedDetails)
 
-    const frontendUrl = process.env.FRONTEND_URL || "http://localhost:5173"
+    const frontendUrl =
+      process.env.FRONTEND_URL ||
+      req.headers.origin ||
+      "https://coursehub-frontend-rdtd.onrender.com"
     const url = `${frontendUrl}/update-password/${token}`
 
     await mailSender(
