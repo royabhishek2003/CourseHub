@@ -17,24 +17,6 @@ const slugify = (text) =>
     .trim()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
-const subLinks = [
-  {
-    title: "Python",
-    link: "/catalog/python",
-  },
-  {
-    title: "javascript",
-    link: "/catalog/javascript",
-  },
-  {
-    title: "web-development",
-    link: "/catalog/web-development",
-  },
-  {
-    title: "Android Development",
-    link: "/catalog/Android Development",
-  },
-];
 
 function Navbar() {   
   const { token } = useSelector((state) => state.auth)  // auth me se distructor karke token extract kiya hai 
@@ -50,7 +32,7 @@ function Navbar() {
       setLoading(true)
       try {
         const res = await apiConnector("GET", categories.CATEGORIES_API)
-        setSubLinks(res.data.data)
+        setSubLinks(res?.data?.data || [])
       } catch (error) {
         console.log("Could not fetch Categories.", error)
       }
@@ -94,8 +76,8 @@ function Navbar() {
                       <div className="invisible absolute left-[50%] top-[50%] z-[1000] flex w-[200px] translate-x-[-50%] translate-y-[3em] flex-col rounded-lg bg-richblack-5 p-4 text-richblack-900 opacity-0 transition-all duration-150 group-hover:visible group-hover:translate-y-[1.65em] group-hover:opacity-100 lg:w-[300px]">
                         <div className="absolute left-[50%] top-0 -z-10 h-6 w-6 translate-x-[80%] translate-y-[-40%] rotate-45 select-none rounded bg-richblack-5"></div>
                         {loading ? (
-                          <p className="text-center">Loading...</p>
-                        ) : subLinks.length ? (
+                          <p className="text-center py-2 text-sm text-richblack-600">Loading...</p>
+                        ) : subLinks?.filter((subLink) => subLink?.courses?.length > 0)?.length > 0 ? (
                           <>
                             {subLinks
                               ?.filter(
@@ -104,7 +86,7 @@ function Navbar() {
                               ?.map((subLink, i) => (
                                 <Link
                                   to={`/catalog/${slugify(subLink.name)}`}
-                                  className="rounded-lg bg-transparent py-4 pl-4 hover:bg-richblack-50"
+                                  className="rounded-lg bg-transparent py-4 pl-4 hover:bg-richblack-50 font-medium text-richblack-900"
                                   key={i}
                                 >
                                   <p>{subLink.name}</p>
@@ -112,7 +94,7 @@ function Navbar() {
                               ))}
                           </>
                         ) : (
-                          <p className="text-center">No Courses Found</p>
+                          <p className="text-center py-2 text-sm text-richblack-600">No Courses Available</p>
                         )}
                       </div>
                     </div>
