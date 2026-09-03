@@ -14,6 +14,9 @@ const fileUpload = require("express-fileupload");
 const dotenv = require("dotenv");
 const dns = require("dns");
 
+// Loading environment variables from .env file (must be before any process.env usage)
+dotenv.config();
+
 // Setting custom DNS servers to avoid potential DNS resolution issues
 // try {
 //   dns.setServers(['8.8.8.8', '1.1.1.1']); // Google & Cloudflare DNS
@@ -23,9 +26,6 @@ const dns = require("dns");
  
 // Setting up port number
 const PORT = process.env.PORT || 4000;
-
-// Loading environment variables from .env file
-dotenv.config();
 
 // Connecting to database
 database.connect();
@@ -42,10 +42,12 @@ app.use(cors({
   credentials: true
 }));
 
+const os = require("os");
+
 app.use(
 	fileUpload({
 		useTempFiles: true,
-		tempFileDir: "/tmp/",
+		tempFileDir: os.tmpdir(),
 	})
 );
 
